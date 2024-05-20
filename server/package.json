@@ -2,9 +2,9 @@
   "name": "stripe-sample",
   "version": "1.0.0",
   "description": "A sample Stripe implementation",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "author": "stripe-samples",
   "license": "ISC",

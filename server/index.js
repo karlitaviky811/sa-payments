@@ -7,7 +7,7 @@ const express = require('express')
 const app = express()
 
 
-const port = 4242
+const port = process.env.port | 4242;
 const stripe = require('stripe')('sk_test_51PHqym082Z2VYEr07fwL95gqoaNpiRZ8XDbpDFRvEf3cFHjyFFL6Gf26a9nAVLpPX5MIBbn07wKe9oMkbLgYk1ww00zXwY4jZ4');
 const YOUR_DOMAIN = 'http://localhost:4242';
 
@@ -15,7 +15,7 @@ const YOUR_DOMAIN = 'http://localhost:4242';
 var http = require('http');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-app.set('port', port || 3000);
+app.set('port', port || 4242);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
