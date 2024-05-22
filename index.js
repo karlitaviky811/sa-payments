@@ -36,11 +36,11 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => {
   console.log('hey')
   res.header("Access-Control-Allow-Origin", '*');
-  res.send('Hello World! test')
+  res.send('Hello World! :)')
 })
 
 app.post('/create-checkout-session', async (req, res) => {
-
+  res.header("Access-Control-Allow-Origin", "*");
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -59,9 +59,9 @@ app.post('/create-checkout-session', async (req, res) => {
 });
 
 app.get("/acepted", (req, res) => {
-  
+  res.header("Access-Control-Allow-Origin", "*");
   res.setHeader("Content-Type", "text/html");
-  fs.readFile('/public/success.html', (err, data) => {
+  fs.readFile('/success.html', (err, data) => {
     if(err) {
       console.log(err);
       res.end();
