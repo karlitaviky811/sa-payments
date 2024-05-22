@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => {
   console.log('hey')
   res.header("Access-Control-Allow-Origin", '*');
-  res.send('Hello World!')
+  res.send('Hello World! test')
 })
 
 app.post('/create-checkout-session', async (req, res) => {
@@ -61,7 +61,7 @@ app.post('/create-checkout-session', async (req, res) => {
 app.get("/acepted", (req, res) => {
   
   res.setHeader("Content-Type", "text/html");
-  fs.readFile('./success.html', (err, data) => {
+  fs.readFile('/public/success.html', (err, data) => {
     if(err) {
       console.log(err);
       res.end();
