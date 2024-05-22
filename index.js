@@ -19,8 +19,9 @@ var cors = require('cors');
 app.set('port', port || 4242);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+var path = require('path');
 app.use(cors());
- 
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
@@ -51,7 +52,7 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    return_url: `${YOUR_DOMAIN}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+    return_url: `${YOUR_DOMAIN}/acepted`,
   });
   res.status(200).json(session)
 
@@ -61,7 +62,8 @@ app.post('/create-checkout-session', async (req, res) => {
 app.get("/acepted", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.setHeader("Content-Type", "text/html");
-  fs.readFile('/success.html', (err, data) => {
+
+  fs.readFile(path.join(__dirname,'/success.html'), (err, data) => {
     if(err) {
       console.log(err);
       res.end();
