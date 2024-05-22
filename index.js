@@ -61,7 +61,7 @@ app.post('/create-checkout-session', async (req, res) => {
 app.get("/acepted", (req, res) => {
   
   res.setHeader("Content-Type", "text/html");
-  fs.readFile('./public/success.html', (err, data) => {
+  fs.readFile('./success.html', (err, data) => {
     if(err) {
       console.log(err);
       res.end();
