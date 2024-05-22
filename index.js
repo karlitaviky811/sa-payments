@@ -13,6 +13,7 @@ const YOUR_DOMAIN = 'http://localhost:4242';
 
 
 var http = require('http');
+const fs = require('fs');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 app.set('port', port || 4242);
@@ -41,7 +42,6 @@ app.get('/', (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
 
   const session = await stripe.checkout.sessions.create({
-    ui_mode: 'embedded',
     line_items: [
       {
         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
@@ -50,13 +50,26 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url:`${YOUR_DOMAIN}/success.html`,
-    cancel_url:`${YOUR_DOMAIN}/success.html`,
-    return_url: `${YOUR_DOMAIN}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+    success_url:`${YOUR_DOMAIN}/acepted`,
+    cancel_url:`${YOUR_DOMAIN}/acepted`,
   });
   res.status(200).json(session)
 
   //res.send({clientSecret: session.client_secret});
+});
+
+app.get("/acepted", (req, res) => {
+  
+  res.setHeader("Content-Type", "text/html");
+  fs.readFile('./public/success.html', (err, data) => {
+    if(err) {
+      console.log(err);
+      res.end();
+    } else {
+      res.write(data);
+      res.end();
+    }
+  })
 });
 
 app.get('/session-status', async (req, res) => {
