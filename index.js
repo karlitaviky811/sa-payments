@@ -40,7 +40,6 @@ app.get('/', (req, res) => {
 
 app.post('/create-checkout-session', async (req, res) => {
 
-  console.log('hereeeeee')
   const session = await stripe.checkout.sessions.create({
     ui_mode: 'embedded',
     line_items: [
@@ -51,6 +50,8 @@ app.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
+    success:`${YOUR_DOMAIN}/success.html?`,
+    cancel:`${YOUR_DOMAIN}/success.html?`,
     return_url: `${YOUR_DOMAIN}/return.html?session_id={CHECKOUT_SESSION_ID}`,
   });
   res.status(200).json(session)
